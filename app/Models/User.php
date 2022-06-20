@@ -50,4 +50,8 @@ class User extends Authenticatable
     public function addresses(){
         return $this->hasMany(Address::class,'user_id','id');
     }
+    // 02.#2 - One To Many relationship _ hasMany() _ Laravel Eloquent Relationships
+    public function posts(){
+        return $this->hasMany(Post::class,'user_id','id');
+    }
 }

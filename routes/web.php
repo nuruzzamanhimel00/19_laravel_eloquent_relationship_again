@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Models\Post;
 use App\Models\User;
 use App\Models\Address;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,5 +40,14 @@ Route::get('/address-user', function () {
 Route::get('/tut_2', function () {
     $users = User::with(['addresses'])->latest()->get();
     return view('tut_2',compact('users'));
+    // return $users;
+});
+
+Route::get('/tut_2_post_user', function () {
+    $posts = Post::with(['user'])->latest()->get();
+
+    $users = User::with(['posts'])->latest()->get();
+
+    return view('posts.index',compact('posts','users'));
     // return $users;
 });
