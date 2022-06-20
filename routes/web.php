@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
+use App\Models\Address;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// #### 01.#1 - One to One relationship _ hasOne() & belongsTo() _ Laravel Eloquent Relationships
+Route::get('/users-address', function () {
+    $users = User::with(['address'])->latest()->get();
+    return view('users',compact('users'));
+    // return $users;
+});
+Route::get('/address-user', function () {
+     $addresses = Address::with(['user'])->latest()->get();
+    //  dd($addresses->first()->user);
+    return view('address_user',compact('addresses'));
+    // return $users;
+});
+
