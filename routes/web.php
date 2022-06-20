@@ -35,3 +35,9 @@ Route::get('/address-user', function () {
     // return $users;
 });
 
+// 02.#2 - One To Many relationship _ hasMany() _ Laravel Eloquent Relationships
+Route::get('/tut_2', function () {
+    $users = User::with(['addresses'])->latest()->get();
+    return view('tut_2',compact('users'));
+    // return $users;
+});
