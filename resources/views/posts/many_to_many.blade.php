@@ -14,7 +14,7 @@
                             <h1>Post title: {{ $post->title }}</h1>
                             <ul>
                                 @forelse ($post->tags as $tag )
-                                    <li>Post Tags: {{ $tag->name }}</li>
+                                    <li>Post Tags: {{ $tag->name }} ( {{ $tag->pivot->created_at }} ) </li>
                                 @empty
 
                                 @endforelse

@@ -65,8 +65,14 @@ Route::get('/tut_3_post_tag_create', function () {
     // // oi post er ager tag delete korbe then post er under y tag set korbe
     // $post->tags()->detach();
     // $post->tags()->attach([1,2]);
-    // sync ager post data delete korbe and notun post er under y tag set korbe
-    $post->tags()->sync([1,2]);
+
+    // // sync ager post data delete korbe and notun post er under y tag set korbe
+    // $post->tags()->sync([1,2]);
+
+    // ***additional column attach into pivot table.................
+    $tags = Tag::inRandomOrder()->take(2)->get();
+    // $post->tags()->attach($tags,['status'=>'executed']);
+    $post->tags()->sync([1,2],['status'=>'executed']);
 
     return "Post tag pivot create successfully";
     // return $users;
@@ -89,8 +95,9 @@ Route::get('/tut_3_post_tag_delete', function () {
 });
 // display post tags
 Route::get('/tut_3_post_tag_display', function () {
-    $posts = Post::with(['tags'])->get();
-    $tags = Tag::with(['posts'])->get();
+    return $posts = Post::with(['tags'])->latest()->get();
+    // return $posts->where('id',36)->first()->tags->first()->pivot->created_at;
+    $tags = Tag::with(['posts'])->latest()->get();
     return view("posts.many_to_many",compact('posts','tags'));
 });
 
