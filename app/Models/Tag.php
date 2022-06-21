@@ -12,4 +12,11 @@ class Tag extends Model
     protected $fillable=[
         'name'
     ];
+
+    // 03.#3.1_ Many To Many relationship _ belongsToMany() _ Laravel Eloquent Relationships
+
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class, 'post_tag', 'tag_id','post_id');
+    }
 }

@@ -23,4 +23,12 @@ class Post extends Model
         ]);
     }
 
+    // 03.#3.1_ Many To Many relationship _ belongsToMany() _ Laravel Eloquent Relationships
+
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
+    }
+
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Tag;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Address;
@@ -50,4 +51,30 @@ Route::get('/tut_2_post_user', function () {
 
     return view('posts.index',compact('posts','users'));
     // return $users;
+});
+
+// 03.#3.1_ Many To Many relationship _ belongsToMany() _ Laravel Eloquent Relationships
+Route::get('/tut_3_post_tag_create', function () {
+    $post = Post::inRandomOrder()->first();
+    $tags = Tag::inRandomOrder()->take(2)->get();
+    $post->tags()->attach($tags);
+    // $post->tags()->sync($tags);
+    return "Post tag pivot create successfully";
+    // return $users;
+});
+
+Route::get('/tut_3_tag_post_create', function () {
+    $tag = Tag::inRandomOrder()->first();
+    $posts = Post::inRandomOrder()->take(2)->get();
+    $tag->posts()->attach($posts);
+    // $post->tags()->sync($tags);
+    return "Post tag pivot create successfully";
+    // return $users;
+});
+
+Route::get('/tut_3_post_tag_delete', function () {
+    $post = Post::find(36);
+    $tag = Tag::find(12);
+    $post->tags()->detach($tag);
+    return "Post tag pivot deleted successfully";
 });
