@@ -55,10 +55,19 @@ Route::get('/tut_2_post_user', function () {
 
 // 03.#3.1_ Many To Many relationship _ belongsToMany() _ Laravel Eloquent Relationships
 Route::get('/tut_3_post_tag_create', function () {
-    $post = Post::inRandomOrder()->first();
-    $tags = Tag::inRandomOrder()->take(2)->get();
-    $post->tags()->attach($tags);
-    // $post->tags()->sync($tags);
+    // rule: 01
+    // $post = Post::inRandomOrder()->first();
+    // $tags = Tag::inRandomOrder()->take(2)->get();
+    // $post->tags()->attach($tags);
+
+    // rule : 02
+    $post = Post::find(36);
+    // // oi post er ager tag delete korbe then post er under y tag set korbe
+    // $post->tags()->detach();
+    // $post->tags()->attach([1,2]);
+    // sync ager post data delete korbe and notun post er under y tag set korbe
+    $post->tags()->sync([1,2]);
+
     return "Post tag pivot create successfully";
     // return $users;
 });
@@ -78,3 +87,10 @@ Route::get('/tut_3_post_tag_delete', function () {
     $post->tags()->detach($tag);
     return "Post tag pivot deleted successfully";
 });
+// display post tags
+Route::get('/tut_3_post_tag_display', function () {
+    $posts = Post::with(['tags'])->get();
+    $tags = Tag::with(['posts'])->get();
+    return view("posts.many_to_many",compact('posts','tags'));
+});
+
