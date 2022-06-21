@@ -3,6 +3,7 @@
 use App\Models\Tag;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Video;
 use App\Models\Address;
 use App\Models\Project;
 use App\Models\UserOne;
@@ -146,4 +147,40 @@ Route::get('/tut_6_has_many_through_pivot_fetch', function () {
 
    return view("project_user_pivot",compact('users','projects'));
 
+});
+
+ // 08.#5.1 One to Many & One to One Polymorphic Relationships _ Laravel Eloquent Relationships
+
+Route::get('/tut_8_user_post_comment_create', function () {
+
+    $user = User::inRandomOrder()->first();
+    $post = Post::inRandomOrder()->first();
+
+    $post->comments()->create([
+        'user_id' => $user->id,
+        'body' => "This is comment modya"
+    ]);
+
+    return "Post Comment Created";
+});
+
+Route::get('/tut_8_user_video_comment_create', function () {
+
+    $user = User::inRandomOrder()->first();
+    $video = Video::inRandomOrder()->first();
+
+    $video->comments()->create([
+        'user_id' => $user->id,
+        'body' => "This is comment modya"
+    ]);
+
+    return "video Comment Created";
+});
+
+Route::get('/tut_8_user_post_videos_comments', function () {
+
+     $posts = Post::with(['comments'])->get();
+    $videos = Video::with(['comments'])->inRandomOrder()->get();
+
+    return view("polymorfic_one_to_many",compact('posts','videos'));
 });

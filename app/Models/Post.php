@@ -33,4 +33,14 @@ class Post extends Model
         ->withPivot('status');
     }
 
+    // 08.#5.1 One to Many & One to One Polymorphic Relationships _ Laravel Eloquent Relationships
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+    public function comment()
+    {
+        return $this->morphOne(Comment::class, 'commentable');
+    }
+
 }

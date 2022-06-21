@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UserOneSeeder::class);
         $this->call(TaskOneSeeder::class);
 
+        $this->call(VideoSeeder::class);
+
         $this->call(ProjectSeeder::class);
         \App\Models\User::factory(10)->create();
         $this->call(TaskSeeder::class);
