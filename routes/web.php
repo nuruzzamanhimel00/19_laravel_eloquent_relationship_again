@@ -4,6 +4,7 @@ use App\Models\Tag;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Address;
+use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -101,3 +102,14 @@ Route::get('/tut_3_post_tag_display', function () {
     return view("posts.many_to_many",compact('posts','tags'));
 });
 
+
+ // 06.#4.1_ has-one-through & has-many-through Laravel Eloquent Relationships
+
+Route::get('/tut_6_has_on_through', function () {
+
+    $projects = Project::get();
+    return $projects->first()->tasks;
+
+    return ($projects->first()->users->first()->tasks);
+
+});

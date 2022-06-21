@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Task;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -21,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'project_id',
     ];
 
     /**
@@ -54,4 +56,13 @@ class User extends Authenticatable
     public function posts(){
         return $this->hasMany(Post::class,'user_id','id');
     }
+
+     // 06.#4.1_ has-one-through & has-many-through Laravel Eloquent Relationships
+    public function project(){
+        return $this->belongsTo(Project::class,'project_id','id');
+    }
+    public function tasks(){
+        return $this->hasMany(Task::class,'user_id','id');
+    }
+
 }
