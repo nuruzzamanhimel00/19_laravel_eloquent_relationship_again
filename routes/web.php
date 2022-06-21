@@ -5,6 +5,8 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Address;
 use App\Models\Project;
+use App\Models\UserOne;
+use App\Models\ProjectOne;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -111,5 +113,37 @@ Route::get('/tut_6_has_on_through', function () {
     return $projects->first()->tasks;
 
     return ($projects->first()->users->first()->tasks);
+
+});
+
+// 07.#4.2 has-many-through relation using Pivot model _ Laravel Eloquent Relationships
+Route::get('/tut_6_has_many_through_pivot_create_project_user', function () {
+
+    $project = ProjectOne::inRandomOrder()->first();
+    $user = UserOne::inRandomOrder()->take(5)->get();
+
+    $project->users()->sync($user);
+
+    return "Project wise user created successfully";
+
+});
+
+Route::get('/tut_6_has_many_through_pivot_create_user_wise_project', function () {
+
+    $user = UserOne::inRandomOrder()->first();
+    $project = ProjectOne::inRandomOrder()->take(5)->get();
+
+    $user->projects()->sync($project);
+
+    return "User wise Project created successfully";
+
+});
+
+Route::get('/tut_6_has_many_through_pivot_fetch', function () {
+
+    $users = UserOne::with('projects')->get();
+    $projects = ProjectOne::with('users','tasks')->get();
+
+   return view("project_user_pivot",compact('users','projects'));
 
 });
