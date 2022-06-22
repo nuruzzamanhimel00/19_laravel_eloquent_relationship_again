@@ -26,6 +26,9 @@ class Video extends Model
 
     public function marphToManyTags()
     {
-        return $this->morphToMany(Tag::class, 'taggable','taggables');
+        return $this->morphToMany(Tag::class,
+        'taggable', // identifier
+        'taggables' // intermidate table name
+        );
     }
 }
