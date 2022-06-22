@@ -43,4 +43,11 @@ class Post extends Model
         return $this->morphOne(Comment::class, 'commentable');
     }
 
+    // 09.#5.2 Many to Many Polymorphic Relationship _ Laravel Eloquent Relationships
+
+    public function marphToManyTags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable','taggables');
+    }
+
 }

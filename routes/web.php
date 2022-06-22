@@ -184,3 +184,54 @@ Route::get('/tut_8_user_post_videos_comments', function () {
 
     return view("polymorfic_one_to_many",compact('posts','videos'));
 });
+
+// 09.#5.2 Many to Many Polymorphic Relationship _ Laravel Eloquent Relationships
+
+Route::get('/tut_9_post_tag_create', function () {
+    // ** one wayyy..............................
+    // $post = Post::inRandomOrder()->first();
+    // $post->marphToManyTags()->create([
+    //     'name' => 'tag 12'
+    // ]);
+
+    // ** secound way .............................
+
+    $post = Post::inRandomOrder()->first();
+    $tag = Tag::create([
+        'name' => 'tag 12'
+    ]);
+    $post->marphToManyTags()->attach($tag);
+    return "Post tag create";
+});
+
+Route::get('/tut_9_video_tag_create', function () {
+    // $video = Video::inRandomOrder()->first();
+    // $video->marphToManyTags()->create([
+    //     'name' => 'video tag 12'
+    // ]);
+
+    $video = Video::find(2);
+    $video->marphToManyTags()->create([
+        'name' => 'video tag 1234'
+    ]);
+    return "video tag create";
+});
+
+Route::get('/tut_9_post_video_tag_retrive', function () {
+    // $videos = Video::with(['marphToManyTags'])->has('marphToManyTags')->get();
+    // dd($videos);
+
+    // $tags = Tag::find(32);
+    // $tags->morphedByManyvideos()->create([
+    //     'title' => "THis is video titile"
+    // ]);
+    // dd($tags->morphedByManyvideos);
+
+    //same work
+    $tags = Tag::find(32);
+    $video = Video::create([
+        'title' => "THis is video titile"
+    ]);
+    $tags->morphedByManyvideos()->attach($video);
+    dd($tags->morphedByManyvideos);
+});
