@@ -19,7 +19,8 @@ class Tag extends Model
     public function posts()
     {
         return $this->belongsToMany(Post::class, 'post_tag', 'tag_id','post_id')
-        ->withTimestamps();
+        ->withTimestamps()
+        ->withPivot('status');;
     }
 
 // 09.#5.2 Many to Many Polymorphic Relationship _ Laravel Eloquent Relationships
