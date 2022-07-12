@@ -57,7 +57,9 @@ Route::get('/tut_2_post_user', function () {
     // return $users;
 });
 
+// ######################
 // 03.#3.1_ Many To Many relationship _ belongsToMany() _ Laravel Eloquent Relationships
+
 Route::get('/tut_3_post_tag_create', function () {
     // rule: 01
     // $post = Post::inRandomOrder()->first();
