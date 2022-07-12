@@ -77,8 +77,8 @@ Route::get('/tut_3_post_tag_create', function () {
 
     // ***additional column attach into pivot table.................
     $tags = Tag::inRandomOrder()->take(2)->get();
-    // $post->tags()->attach($tags,['status'=>'executed']);
-    $post->tags()->sync([1,2],['status'=>'executed']);
+    $post->tags()->attach($tags,['status'=>'executed']);
+    // $post->tags()->sync([1,2],['status'=>'executed']);
 
     return "Post tag pivot create successfully";
     // return $users;
