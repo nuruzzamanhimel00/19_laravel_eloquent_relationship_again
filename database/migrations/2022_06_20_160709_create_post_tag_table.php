@@ -11,6 +11,7 @@ class CreatePostTagTable extends Migration
      *
      * @return void
      */
+    //php artisan make:migration create_post_tag --create=post_tag
     public function up()
     {
         Schema::create('post_tag', function (Blueprint $table) {
