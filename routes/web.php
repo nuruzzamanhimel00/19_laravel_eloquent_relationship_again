@@ -95,7 +95,7 @@ Route::get('/tut_3_tag_post_create', function () {
 
 Route::get('/tut_3_post_tag_delete', function () {
     $post = Post::find(36);
-    $tag = Tag::find(12);
+    $tag = Tag::find(56);
     $post->tags()->detach($tag);
     return "Post tag pivot deleted successfully";
 });
@@ -104,6 +104,9 @@ Route::get('/tut_3_post_tag_display', function () {
     return $posts = Post::with(['tags'])->latest()->get();
     // return $posts->where('id',36)->first()->tags->first()->pivot->created_at;
     $tags = Tag::with(['posts'])->latest()->get();
+
+
+
     return view("posts.many_to_many",compact('posts','tags'));
 });
 
@@ -113,7 +116,8 @@ Route::get('/tut_3_post_tag_display', function () {
 Route::get('/tut_6_has_on_through', function () {
 
     $projects = Project::get();
-    return $projects->first()->tasks;
+    // return $projects->first()->tasks;
+    return $projects->first()->task;
 
     return ($projects->first()->users->first()->tasks);
 
