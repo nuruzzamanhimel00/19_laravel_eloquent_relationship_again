@@ -129,6 +129,8 @@ Route::get('/tut_6_has_many_through_pivot_create_project_user', function () {
     $project = ProjectOne::inRandomOrder()->first();
     $user = UserOne::inRandomOrder()->take(5)->get();
 
+    // $project->users()->attach($user);
+
     $project->users()->sync($user);
 
     return "Project wise user created successfully";
