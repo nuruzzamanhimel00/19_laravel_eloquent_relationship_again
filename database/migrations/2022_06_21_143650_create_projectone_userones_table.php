@@ -11,6 +11,7 @@ class CreateProjectoneUseronesTable extends Migration
      *
      * @return void
      */
+    // php artisan make:migration create_projectone_userones_table --create=projectone_userones
     public function up()
     {
         Schema::create('projectone_userones', function (Blueprint $table) {

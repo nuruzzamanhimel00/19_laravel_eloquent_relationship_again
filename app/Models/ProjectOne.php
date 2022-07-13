@@ -19,7 +19,11 @@ class ProjectOne extends Model
 
     public function users()
     {
-        return $this->belongsToMany(UserOne::class, 'projectone_userones', 'project_id', 'user_id')
+        return $this->belongsToMany(
+        UserOne::class,
+        'projectone_userones',
+        'project_id',
+        'user_id')
         ->withTimestamps();
     }
 
