@@ -2,9 +2,11 @@
 
 use App\Models\Tag;
 use App\Models\Post;
+use App\Models\Shop;
 use App\Models\User;
 use App\Models\Video;
 use App\Models\Address;
+use App\Models\Country;
 use App\Models\Project;
 use App\Models\UserOne;
 use App\Models\ProjectOne;
@@ -245,3 +247,23 @@ Route::get('/tut_9_post_video_tag_retrive', function () {
     $tags->morphedByManyvideos()->attach($video);
     dd($tags->morphedByManyvideos);
 });
+
+// ############## Laravel Eloquent_ Deeper Relationships with One Query.mp4 #######
+
+
+Route::get('/country-fetch', function () {
+    // dd("hdl");
+    $countries = Country::with(['shops'])->get();
+    return view("posts.deeper-relation.country",compact('countries'));
+    // return $countries;
+});
+
+
+Route::get('/shop-fetch', function () {
+    // dd("hdl");
+    $shops = Shop::with(['city.country'])->get();
+    return view("posts.deeper-relation.shop",compact('shops'));
+
+    // return $countries;
+});
+

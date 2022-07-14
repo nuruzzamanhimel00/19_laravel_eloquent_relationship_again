@@ -12,4 +12,11 @@ class Shop extends Model
         'cities_id',
         'name',
     ];
+
+
+    public function city()
+    {
+        return $this->belongsTo(City::class,'cities_id','id');
+    }
+
 }

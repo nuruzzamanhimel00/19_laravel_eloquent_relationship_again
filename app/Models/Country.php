@@ -11,4 +11,21 @@ class Country extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function cities(){
+        return $this->hasMany(City::class);
+    }
+
+    public function shops()
+    {
+        return $this->hasManyThrough(
+        Shop::class,
+        City::class,
+        'countries_id',
+        'cities_id',
+        'id',
+        'id',
+        );
+    }
+
 }
