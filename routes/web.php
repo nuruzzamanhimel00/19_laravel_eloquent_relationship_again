@@ -218,7 +218,7 @@ Route::get('/tut_9_post_tag_create', function () {
 
     // ** secound way .............................
 
-    $post = Post::inRandomOrder()->first();
+    $post = Post::first();
     $tag = Tag::create([
         'name' => 'tag 12'
     ]);
