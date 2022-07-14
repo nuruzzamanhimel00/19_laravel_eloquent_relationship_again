@@ -11,6 +11,7 @@ class CreateTaggablesTable extends Migration
      *
      * @return void
      */
+    // php artisan make:migration create_taggables_table --create=taggables
     public function up()
     {
         Schema::create('taggables', function (Blueprint $table) {
