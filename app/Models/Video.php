@@ -28,7 +28,7 @@ class Video extends Model
     {
         return $this->morphToMany(Tag::class,
         'taggable', // identifier
-        'taggables' // intermidate table name
+        'taggables' // intermidate table name if table name is different
         );
     }
 }
