@@ -27,11 +27,17 @@ class Tag extends Model
 
     public function morphedByManyposts()
     {
-        return $this->morphedByMany(Post::class, 'taggable','taggables');
+        return $this->morphedByMany(Post::class,
+        'taggable', // identifier
+        'taggables' // intermidate table name if table name is different
+        );
     }
 
     public function morphedByManyvideos()
     {
-        return $this->morphedByMany(Video::class, 'taggable','taggables');
+        return $this->morphedByMany(Video::class,
+        'taggable', // identifier
+        'taggables' // intermidate table name if table name is different
+        );
     }
 }
