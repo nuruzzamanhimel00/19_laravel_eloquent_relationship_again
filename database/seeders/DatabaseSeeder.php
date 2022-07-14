@@ -26,5 +26,9 @@ class DatabaseSeeder extends Seeder
         $this->call(AddressSeeder::class);
         $this->call(PostSeeder::class);
         $this->call(TagSeeder::class);
+
+        $this->call(CountrySeeder::class);
+        $this->call(CitySeeder::class);
+        $this->call(ShopSeeder::class);
     }
 }
