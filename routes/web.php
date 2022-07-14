@@ -6,6 +6,7 @@ use App\Models\Shop;
 use App\Models\User;
 use App\Models\Video;
 use App\Models\Address;
+use App\Models\Comment;
 use App\Models\Country;
 use App\Models\Project;
 use App\Models\UserOne;
@@ -183,7 +184,7 @@ Route::get('/tut_8_user_video_comment_create', function () {
 
     $video->comments()->create([
         'user_id' => $user->id,
-        'body' => "This is comment modya"
+        'body' => "This is comment Video"
     ]);
 
     return "video Comment Created";
@@ -191,11 +192,20 @@ Route::get('/tut_8_user_video_comment_create', function () {
 
 Route::get('/tut_8_user_post_videos_comments', function () {
 
-     $posts = Post::with(['comments'])->get();
+    $posts = Post::with(['comments'])->get();
     $videos = Video::with(['comments'])->inRandomOrder()->get();
 
     return view("polymorfic_one_to_many",compact('posts','videos'));
 });
+
+
+Route::get('/all-comment', function () {
+
+    $comments =Comment::with(['commentable'])->first();
+    dd($comments->commentable);
+});
+
+
 
 // 09.#5.2 Many to Many Polymorphic Relationship _ Laravel Eloquent Relationships
 
